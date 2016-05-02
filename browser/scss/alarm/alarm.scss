@@ -1,0 +1,18 @@
+#box {
+  display: flex;
+  justify-content: flex-end;
+  align-self: flex-start;
+  width: 50%;
+
+  #half-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    #quarter-box {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}

@@ -1,0 +1,59 @@
+From Spotify:
+
+
+<a href="/auth/spotify">Login with Spotify</a>
+
+
+
+<!--  <div>
+    <div id="login">
+     <h1>First, log in to spotify</h1>
+     <a href="/login">Log in</a>
+    </div>
+    <div id="loggedin">
+    </div>
+ </div>
+ -->
+<!--  <script id="loggedin-template" type="text/x-handlebars-template">
+    <h1>Logged in as {{display_name}}</h1>
+    <img id="avatar" width="200" src="{{images.0.url}}" />
+    <dl>
+     <dt>Display name</dt><dd>{{display_name}}</dd>
+     <dt>Username</dt><dd>{{id}}</dd>
+     <dt>Email</dt><dd>{{email}}</dd>
+     <dt>Spotify URI</dt><dd><a href="{{external_urls.spotify}}">{{external_urls.spotify}}</a></dd>
+     <dt>Link</dt><dd><a href="{{href}}">{{href}}</a></dd>
+     <dt>Profile Image</dt><dd>{{images.0.url}}</dd>
+    </dl>
+    <p><a href="/">Log in again</a></p>
+ </script> -->
+
+
+
+
+
+
+
+<form id="login-form" name="loginForm" ng-submit="loginForm.$valid && sendLogin(login)">
+
+    <alert type="danger" ng-show="error">
+        {{ error }}
+    </alert>
+
+    <div class="form-group">
+        <label for="email">Email address</label>
+        <input type="text" ng-model="login.email" class="form-control" id="email" placeholder="Enter email">
+    </div>
+    <div class="form-group">
+        <label for="login-password">Password</label>
+        <input type="password" ng-model="login.password" class="form-control" id="login-password" placeholder="Password">
+    </div>
+    <button type="submit" class="btn btn-default">Submit</button>
+
+    <div>
+        <p><oauth-button provider-name="Twitter" verb="Sign in"></oauth-button></p>
+        <p><oauth-button provider-name="Facebook" verb="Sign in"></oauth-button></p>
+        <p><oauth-button provider-name="Google" verb="Sign in"></oauth-button></p>
+        <p><oauth-button provider-name="Spotify" verb="Sign in"></oauth-button></p>
+    </div>
+</form>

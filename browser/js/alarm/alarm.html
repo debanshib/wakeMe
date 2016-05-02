@@ -1,0 +1,114 @@
+<div id='clock' class='col-md-6'>
+	{{time.hours}} : {{time.minutes}} : {{time.seconds}}   {{time.AMPM}}
+</div>
+<button id='alarm-button' ng-show='!settingAlarm && !alarmLive' ng-click='setupAlarm()'>Reset alarm</button>
+<button id='alarm-button' ng-show='settingAlarm && !alarmLive' ng-click='saveAlarm(input)'>Save alarm</button>
+
+<button id='alarm-button' ng-click='turnOffAlarm()' ng-show="alarmLive">Turn off alarm</button>
+<button id='alarm-button' ng-click='snooze()' ng-show="alarmLive">Snooze</button>
+
+<div ng-show='alarm.hours'>Alarm saved for: {{alarm.hours}}:{{alarm.minutes}} {{alarm.AMPM}}</div>
+<div id='alarm' ng-show='settingAlarm'>
+	<form>
+		<label>Hours</label>
+		<input size='5' ng-model="input.hours">
+		<label>Min</label>
+		<input size='5' ng-model="input.minutes">
+		<label>AM / PM</label> 
+		<select ng-model="input.AMPM">
+			<option value="AM">AM</option>
+			<option value="PM">PM</option>
+		</select>
+		<label>Morning Message</label>
+		<input id='text' rows='3' ng-model="input.message">
+	</form>
+</div>
+
+
+
+
+<style>
+	.col-md-6 {
+    width: 50%;
+    float: left;
+    padding: 10px; }
+
+	#clock {
+		background-color: black;
+		display: flex;
+		justify-content: center;
+		align-self: center;
+		width: 500px;
+		font-size: 60px;
+		color: white;
+		font-weight: 2px;
+	}
+	#alarm-button {
+		border: 10px;
+		margin: 10px;
+		padding: 10px;
+		background-color: red;
+		/*display: flex;
+		justify-content: center;
+		align-self: center;
+		width: 30px;*/
+		font-size: 20px;
+		color: white;
+		/*font-weight: 2px;*/
+	}
+	#alarm {
+		padding-top: 100px;
+		display: flex;
+		justify-content: flex-start;
+		align-self: flex-end;
+		width: 500px;
+		font-size: 20px;
+		color: red;
+		font-weight: 2px;
+	}
+
+</style>
+	
+<!-- 
+			<div class='inputs'>
+				Morning message:
+				<textarea id="text" cols="45" rows="3">Hello world this is some text to say</textarea>
+
+				<select id="voiceselection"></select>
+
+				<input onclick="responsiveVoice.speak($('#text').val(),$('#voiceselection').val());" type="button" value="Play" />
+				<br>
+				<button id="isPlaying">Playing:</button>
+				<p id="r">?</p>
+
+				<script>
+					var voicelist = responsiveVoice.getVoices();
+
+					var vselect = $("#voiceselection");
+
+					$.each(voicelist, function() {
+						vselect.append($("<option />").val(this.name).text(this.name));
+					});
+
+// Yours
+$('#isPlaying').on('click', function() {
+	$('#r').text(window.speechSynthesis.speaking)
+})
+</script>
+
+
+</div>
+<input>
+</input>
+
+<br>
+
+	<button type='button' id='submit'>
+		Save alarm!
+	</button>
+</div>
+</container>
+ -->
+
+<!-- 
+</section> -->
