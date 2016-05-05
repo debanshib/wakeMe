@@ -18,14 +18,16 @@ app.controller('HomeCtrl', function(alarm, AlarmFactory, $state, $scope, $timeou
 			$scope.tracks = tracks;
 		})
 	}
-
+	
 	$scope.getTrack = function(){
-		AlarmFactory.getTrack()
+		MusicFactory.getTrack()
 		.then(function(track){
 			console.log('found ONE track in controller:', track)
 			$scope.song = track;
 			$scope.link = track.preview_url
 			var link = $scope.link;
+			var audio = document.createElement('audio');
+
 			$scope.start(link);
 		})
 	}

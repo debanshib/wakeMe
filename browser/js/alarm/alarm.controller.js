@@ -1,13 +1,46 @@
-app.controller('AlarmCtrl', function(alarm, loggedInUser, $scope, $timeout, $interval, $q, $log, AlarmFactory) {
+app.controller('AlarmCtrl', function(alarm, loggedInUser, $scope, $timeout, $interval, $q, $log, AlarmFactory, MusicFactory) {
+	
+
+	var audio = document.createElement('audio');
+	$scope.start = function(link){
+		audio.src = link;
+		audio.play();
+	}
+
+	$scope.listenToMusic = function(){
+		$scope.music = true;
+	}
+
+	$scope.turnOffMusic = function(){
+		$scope.music = false;
+	}
+
 	//set alarm
 	$scope.alarm = AlarmFactory.getCached();
 	$scope.user = loggedInUser;
 	$scope.input;
 	$scope.settingAlarm = false;
 	$scope.alarmLive = false;
-	
+
+
 	$scope.setupAlarm = function(){
 		$scope.settingAlarm = true;
+		
+		//get track
+		var trackArr = ['0eGsygTp906u18L0Oimnem', '1zHlj4dQ8ZAtrayhuDDmkY', '0l28Q1FFEA0mtpEdEQw1r3']
+		$scope.trackLinks = [];
+		$scope.trackLinks = trackArr.map(function(track){
+			return MusicFactory.getTrack()
+			.then(function(track){
+				return track.preview_url;
+			})
+		})
+		Promise.all($scope.trackLinks)
+		.then(function(tracks){
+			$scope.trackLinks = tracks;
+		})
+		console.log('tracks', $scope.trackLinks)
+
 	}
 
 	//helper function
@@ -58,17 +91,19 @@ app.controller('AlarmCtrl', function(alarm, loggedInUser, $scope, $timeout, $int
 		if ($scope.alarm.isActive && getTime().full > alarm.full) {
 			console.log('ALARM HIT!!!');
 			$scope.alarmLive = true;
-			$timeout(sendVoice, 100);
-			alert('WAKE UP!!!')
+			// $scope.delay = 100000;
+			$timeout(sendVoice, 1000);
+			// alert('WAKE UP!!!')
 		}
 	}
 
 	//trigger voice
 	var sendVoice = function(){
-		responsiveVoice.speak($('#text').val(),$('#voiceselection').val())
+		responsiveVoice.speak($('#text').val())
 	}
 
-	$interval(checkAlarm, 1000);
+	$scope.delay = 10000;
+	$interval(checkAlarm, 10000);
 
 	$scope.turnOffAlarm = function(){
 		$scope.alarm.isActive = false;

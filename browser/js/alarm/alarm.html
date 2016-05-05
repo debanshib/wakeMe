@@ -1,14 +1,16 @@
-<div id='clock' class='col-md-6'>
+<div id='clock' class='col-md-6' ng-hide='music'>
 	{{time.hours}} : {{time.minutes}} : {{time.seconds}}   {{time.AMPM}}
 </div>
-<button id='alarm-button' ng-show='!settingAlarm && !alarmLive' ng-click='setupAlarm()'>Reset alarm</button>
-<button id='alarm-button' ng-show='settingAlarm && !alarmLive' ng-click='saveAlarm(input)'>Save alarm</button>
-
+<button id='alarm-button' ng-show='!settingAlarm && !alarmLive && !music' ng-click='setupAlarm()'>Reset alarm</button>
+<button id='alarm-button' ng-show='settingAlarm && !alarmLive && !music' ng-click='saveAlarm(input)'>Save alarm</button>
 <button id='alarm-button' ng-click='turnOffAlarm()' ng-show="alarmLive">Turn off alarm</button>
 <button id='alarm-button' ng-click='snooze()' ng-show="alarmLive">Snooze</button>
-
-<div ng-show='alarm.hours'>Alarm saved for: {{alarm.hours}}:{{alarm.minutes}} {{alarm.AMPM}}</div>
+<button id='alarm-button'  ng-click='listenToMusic()' ng-show="!music">Listen to music!</button>
+<button id='alarm-button'  ng-click='turnOffMusic()' ng-show="music">Go back to clock!</button>
+<div ng-show='alarm.hours && !music'>Alarm saved for: {{alarm.hours}}:{{alarm.minutes}} {{alarm.AMPM}}</div>
 <div id='alarm' ng-show='settingAlarm'>
+
+
 	<form>
 		<label>Hours</label>
 		<input size='5' ng-model="input.hours">
@@ -19,12 +21,44 @@
 			<option value="AM">AM</option>
 			<option value="PM">PM</option>
 		</select>
+	<!-- 	<label>Play a song</label> -->
+		<!-- <select ng-model="input.song">
+			<option id='music' ng-repeat='track in trackLinks' value={{track}}>{{track}}</option>
+		</select> -->
 		<label>Morning Message</label>
 		<input id='text' rows='3' ng-model="input.message">
 	</form>
+	
+</div>
+<div ng-show='music'>
+<!-- 	<iframe src="https://embed.spotify.com/?uri=spotify:user:spotify:playlist:3rgsDhGHZxZ9sB9DQWQfuf" width="300" height="380" frameborder="0" allowtransparency="true"></iframe> -->
+	<iframe src="https://embed.spotify.com/?uri=spotify%3Auser%3A126119759%3Aplaylist%3A4sC04DJlQ4YdnXyhdDMJZL" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>
+	<!-- <iframe src="https://embed.spotify.com/?uri=spotify%3Auser%3Abea_1608%3Aplaylist%3A73YzTfClWPjUy385ohnYJP" width="300" height="380" frameborder="0" allowtransparency="true"></iframe> -->
 </div>
 
 
+
+<!-- <button ng-click='getTrack()'>Get track</button> -->
+
+
+<!-- <div class='inputs'>
+		Morning message:
+		<textarea id="text" cols="45" rows="3">Hello world this is some text to say</textarea> -->
+
+	<!-- 	<select id="voiceselection"></select> -->
+
+	<!-- 	<input onclick="responsiveVoice.speak($('#text').val(),$('#voiceselection').val());" type="button" value="Play" /> -->
+
+		<!-- 	<script>
+				var voicelist = responsiveVoice.getVoices();
+				var vselect = $("#voiceselection");
+				$.each(voicelist, function() {
+					vselect.append($("<option />").val(this.name).text(this.name));
+				});
+				$('#isPlaying').on('click', function() {
+					$('#r').text(window.speechSynthesis.speaking)
+				})
+			</script> -->
 
 
 <style>
@@ -68,9 +102,16 @@
 	}
 
 </style>
+
+<!-- // <button ng-click='getTrack()'>Get track</button>
+	// SONG!!! <a href={{link}}>{{link}}</a>
+	// <button ng-click='getPlaylistTracks()'>Get playlist tracks</button>
+ -->
+
+
 	
-<!-- 
-			<div class='inputs'>
+
+<!-- 			<div class='inputs'>
 				Morning message:
 				<textarea id="text" cols="45" rows="3">Hello world this is some text to say</textarea>
 
@@ -111,4 +152,4 @@ $('#isPlaying').on('click', function() {
  -->
 
 <!-- 
-</section> -->
+</section> --> 

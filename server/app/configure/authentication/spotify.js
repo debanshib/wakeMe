@@ -35,7 +35,8 @@ module.exports = function (app) {
                     return UserModel.create({
                         spotify: {
                             id: profile.id,
-                            email: profile.id
+                            email: profile.id,
+                            token: refreshToken
                         }
                     });
                 }
@@ -64,7 +65,7 @@ module.exports = function (app) {
         passport.authenticate('spotify', { failureRedirect: '/login' }),
         function (req, res) {
             console.log('res', res)
-            res.redirect('/');
+            res.redirect('/alarm');
         });
 
     // app.get('/authorize/spotify', )

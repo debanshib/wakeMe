@@ -52,13 +52,34 @@ app.factory('MusicFactory', function($http){
 
 // var userId = '57252db059528a407fe20e9d';
 
-	MusicFactory.getPlaylistTracks = function(){
-		return $http.get('/api/spotify/getPlaylistTracks')
-		.then(function(tracks){
-			console.log('tracks found in factory:', tracks)
-			return tracks.data;
-		})
-	}
+	// MusicFactory.getPlaylistTracks = function(){
+ //    console.log('in here')
+	// 	return $http.get('/api/spotify/getPlaylistTracks')
+	// 	.then(function(tracks){
+	// 		console.log('tracks found in factory:', tracks)
+	// 		return tracks.data;
+	// 	})
+	// }
+
+
+ //  MusicFactory.getPlaylistTracks = function(userId, playlistId){
+ //    return $http({
+ //      method: 'GET',
+ //      url: 'https://api.spotify.com/v1/users/' + userId + '/playlists/' + playlistId + '/tracks -H "Authorization: Bearer {f6ee19b0befe423daff0e520cb54e997}"'
+ //    }).then(function(response){
+ //      return response.data;
+ //    })
+ // }
+
+  MusicFactory.getPlaylist = function(){
+    console.log('in factory searchPlaylists function')
+    return $http.get('/api/spotify/searchPlaylists/' + userId + '/playlist/' + playlistId)
+    .then(function(playlist){
+      console.log('playlist found in factory:', playlists)
+      return playlist.data;
+    })
+  };
+
 
 
  	MusicFactory.searchPlaylists = function(){
@@ -70,8 +91,11 @@ app.factory('MusicFactory', function($http){
  		})
  	};
 
- 	MusicFactory.getTrack = function(){
- 		return $http.get('/api/spotify/getTrack')
+
+  // var trackId = '1zHlj4dQ8ZAtrayhuDDmkY'
+// var trackId = '0eGsygTp906u18L0Oimnem'
+ 	MusicFactory.getTrack = function(trackId){
+ 		return $http.get('/api/spotify/getTrack/' + trackId)
  		.then(function(track){
  			console.log('found track in factory:', track)
  			return track.data;
